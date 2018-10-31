@@ -7,24 +7,18 @@ end
 class AboutMethods < Neo::Koan
 
   def test_calling_global_methods
-    assert_equal __(5), my_global_method(2,3)
+    assert_equal 5, my_global_method(2,3)
   end
 
   def test_calling_global_methods_without_parentheses
     result = my_global_method 2, 3
-    assert_equal __(5), result
+    assert_equal 5, result
   end
 
   # (NOTE: We are Using eval below because the example code is
   # considered to be syntactically invalid).
   def test_sometimes_missing_parentheses_are_ambiguous
-    #--
-    eval "assert_equal 5, my_global_method(2, 3)" # REMOVE CHECK # __
-    if false
-      #++
-    eval "assert_equal 5, my_global_method 2, 3" # ENABLE CHECK # __
-      #--
-    end
+    eval "assert_equal 5, my_global_method(2, 3)" # ENABLE CHECK # __
     #++
     #
     # Ruby doesn't know if you mean:
@@ -40,7 +34,7 @@ class AboutMethods < Neo::Koan
   # NOTE: wrong number of arguments is not a SYNTAX error, but a
   # runtime error.
   def test_calling_global_methods_with_wrong_number_of_arguments
-    exception = assert_raise(___(ArgumentError)) do
+    exception = assert_raise(ArgumentError) do
       my_global_method
     end
     #--
